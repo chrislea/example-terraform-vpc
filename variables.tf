@@ -12,9 +12,9 @@ variable "public_subnet_cidrs" {
   type        = list(string)
   description = "The CIDR ranges for the public subnets"
   default = [
-    "10.253.0.0/21",
-    "10.253.8.0/21",
-    "10.253.16.0/21"
+    "10.253.0.0/19",
+    "10.253.32.0/19",
+    "10.253.64.0/19"
   ]
 }
 
@@ -22,9 +22,9 @@ variable "private_subnet_cidrs" {
   type        = list(string)
   description = "The CIDR ranges for the private subnets"
   default = [
-    "10.253.24.0/21",
-    "10.253.32.0/21",
-    "10.253.40.0/21"
+    "10.253.96.0/19",
+    "10.253.128.0/19",
+    "10.253.160.0/19"
   ]
 }
 
