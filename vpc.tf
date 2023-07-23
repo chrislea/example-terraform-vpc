@@ -1,8 +1,8 @@
 resource "aws_vpc" "main" {
-  cidr_block           = "10.253.0.0/16"
+  cidr_block           = var.main_cidr_block
   enable_dns_hostnames = true
   tags = {
-    Name = "Terraform Testing VPC"
+    Name = var.vpc_name
   }
 }
 
@@ -14,7 +14,7 @@ resource "aws_subnet" "public_subnets" {
   availability_zone = element(var.availability_zones, count.index)
 
   tags = {
-    Name = "Public subnet ${count.index + 1}"
+    Name = "${var.public_subnet_name_prefix}-${count.index + 1}"
   }
 }
 
@@ -26,7 +26,7 @@ resource "aws_subnet" "private_subnets" {
   availability_zone = element(var.availability_zones, count.index)
 
   tags = {
-    Name = "Private subnet ${count.index + 1}"
+    Name = "${var.private_subnet_name_prefix}-${count.index + 1}"
   }
 }
 
@@ -34,6 +34,6 @@ resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name = "Terraform Example IGW"
+    Name = var.igw_name
   }
 }
