@@ -30,6 +30,17 @@ resource "aws_subnet" "private_subnets" {
   }
 }
 
+resource "aws_ec2_instance_connect_endpoint" "ec2connect" {
+  count              = var.create_ec2_connect_endpoint ? 1 : 0
+  subnet_id          = aws_subnet.public_subnets[0].id
+  preserve_client_ip = true
+  security_group_ids = [aws_security_group.allow_all.id]
+
+  tags = {
+    Name = "eice-${aws_subnet.public_subnets[0].id}"
+  }
+}
+
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
 

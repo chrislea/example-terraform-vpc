@@ -8,6 +8,12 @@ variable "availability_zones" {
   ]
 }
 
+variable "create_ec2_connect_endpoint" {
+  type        = bool
+  description = "Whether or not to create an EC2 Connect Endpoint"
+  default     = true
+}
+
 variable "main_cidr_block" {
   type        = string
   description = "The primary CIDR block for the VPC"
