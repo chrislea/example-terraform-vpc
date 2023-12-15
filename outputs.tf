@@ -27,11 +27,11 @@ output "vpc_private_subnets" {
 }
 
 output "ec2_instance_connect_endpoint_arn" {
-  value = var.create_ec2_connect_endpoint ? aws_ec2_instance_connect_endpoint.ec2connect[0].arn : null
+  value = var.create_ec2_connect_endpoint == true ? aws_ec2_instance_connect_endpoint.ec2connect[0].arn : null
 }
 
 output "ec2_instance_connect_endpoint_dns_name" {
-  value = var.create_ec2_connect_endpoint ? aws_ec2_instance_connect_endpoint.ec2connect[0].dns_name : null
+  value = var.create_ec2_connect_endpoint == true ? aws_ec2_instance_connect_endpoint.ec2connect[0].dns_name : null
 }
 
 output "nat_gateway" {
