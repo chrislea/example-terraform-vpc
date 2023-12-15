@@ -14,6 +14,12 @@ variable "create_ec2_connect_endpoint" {
   default     = true
 }
 
+variable "create_nat_gateway" {
+  type        = bool
+  description = "Whether or not to create a NAT Gateway"
+  default     = true
+}
+
 variable "main_cidr_block" {
   type        = string
   description = "The primary CIDR block for the VPC"

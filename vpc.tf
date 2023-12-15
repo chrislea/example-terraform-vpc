@@ -41,6 +41,27 @@ resource "aws_ec2_instance_connect_endpoint" "ec2connect" {
   }
 }
 
+resource "aws_eip" "nat_gw_eip" {
+  count  = var.create_nat_gateway == true ? 1 : 0
+  domain = "vpc"
+
+  tags = {
+    Name = "nat_gw_eip"
+  }
+}
+
+resource "aws_nat_gateway" "nat_gw" {
+  count         = var.create_nat_gateway == true ? 1 : 0
+  allocation_id = aws_eip.nat_gw_eip[0].id
+  subnet_id     = aws_subnet.public_subnets[0].id
+
+  tags = {
+    Name = "nat-gw-${aws_subnet.public_subnets[0].id}"
+  }
+
+  depends_on = [aws_internet_gateway.gw]
+}
+
 resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
 

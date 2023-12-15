@@ -34,6 +34,10 @@ output "ec2_instance_connect_endpoint_dns_name" {
   value = var.create_ec2_connect_endpoint ? aws_ec2_instance_connect_endpoint.ec2connect[0].dns_name : null
 }
 
+output "nat_gateway" {
+  value = var.create_nat_gateway == true ? aws_nat_gateway.nat_gw[0] : null
+}
+
 output "vpc_gateway" {
   value = aws_internet_gateway.gw
 }
